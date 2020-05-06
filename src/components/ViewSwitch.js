@@ -13,7 +13,7 @@ export const ViewSwitch = ({showButton, currentViewMode, dispatchChangeViewMode}
 
 const mapStateToProps = state => ({
     currentViewMode: state.currentViewMode,
-    showButton: state.metaDataAvailable && !state.isErrorState
+    showButton: state.metaDataAvailable && !state.inErrorState
 })
 
 const mapDispatchToProps = (dispatch, state) => ({
