@@ -1,26 +1,99 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ConnectedFileInput } from "./components/FileInput";
+import {createStore} from 'redux';
+import { Provider } from 'react-redux'
 
-function App() {
+import {reducer} from './reducers/index'
+import { ConnectedErrorMessage } from "./components/ErrorMessage";
+import { ConnectedMetaData } from "./components/MetaData";
+import { ConnectedMap } from "./components/Map";
+import { ConnectedTable } from "./components/Table";
+import { ConnectedViewSwitch } from "./components/ViewSwitch";
+import styled from "styled-components";
+import Logo from './assets/CameraMatics-logo.png'
+// @ts-ignore
+let reduxDevTools = ('__REDUX_DEVTOOLS_EXTENSION__' in window) ? window.__REDUX_DEVTOOLS_EXTENSION__() : null
+let store = createStore(
+  reducer,
+  reduxDevTools
+);
+
+let AppContainer = styled.main`
+  body{
+    padding: 0;
+    margin: 0;
+  }
+  *{
+    box-sizing: border-box
+  }
+
+  width: 100vw;
+  height: 100vh;
+  background-color: #12284b;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10vh 10vh 80vh;
+  grid-template-areas: "header" "input" "output";
+
+`
+
+let LogoContainer = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: header;
+  width: 100%;
+  height: 100%;
+`
+let LogoComponent = styled.img`
+  height: 80%;
+  width: auto
+`
+
+let InputContainer = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: input;
+  width: 100%;
+  height: 100%;
+`
+
+let OutputContainer = styled.section`
+  grid-area: output;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 10% 75%;
+  grid-template-areas: "meta" "toggle" "main"
+`
+
+let MainContainer  = styled.section`
+  grid-area: main
+`
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <AppContainer>
+        <LogoContainer>
+          <LogoComponent src={Logo} />
+        </LogoContainer>
+        <InputContainer>
+          <ConnectedFileInput/>
+        </InputContainer>
+        <OutputContainer>
+          <ConnectedMetaData/>
+          <ConnectedViewSwitch/>
+          <MainContainer>
+            <ConnectedErrorMessage/>
+            <ConnectedMap/>
+            <ConnectedTable/>
+          </MainContainer>
+        </OutputContainer>
+      </AppContainer>
+    </Provider>
+  )
 }
-
-export default App;
