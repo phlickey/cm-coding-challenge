@@ -12,10 +12,9 @@ import { ConnectedViewSwitch } from "./components/ViewSwitch";
 import styled from "styled-components";
 import Logo from './assets/CameraMatics-logo.png'
 // @ts-ignore
-let reduxDevTools = ('__REDUX_DEVTOOLS_EXTENSION__' in window) ? window.__REDUX_DEVTOOLS_EXTENSION__() : null
 let store = createStore(
   reducer,
-  reduxDevTools
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 let AppContainer = styled.main`

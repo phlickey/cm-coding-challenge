@@ -13,7 +13,7 @@ const MapContainer = styled.div`
     width: 100%;
     height: 100%;
 `
-export const Map = ({displayMap, trip}) => {
+export const Map = ({displayMap, trip=[]}) => {
     // todo: could probably filter out bum data if the distance between
     // two adjacent points doesn't square with the GPSSPEED param
     const coords = trip
@@ -54,8 +54,7 @@ export const Map = ({displayMap, trip}) => {
 }
 
 const mapStateToProps = state => ({
-    displayMap: !state.inErrorState && state.metaDataAvailable && state.currentViewMode === ViewModes.MAP,
+    displayMap: (!state.inErrorState && state.metaDataAvailable && state.currentViewMode === ViewModes.MAP),
     trip: state.tripData
 })
-const mapDispatchToProps = dispatch => ({})
-export const ConnectedMap = connect(mapStateToProps, mapDispatchToProps)(Map)
+export const ConnectedMap = connect(mapStateToProps)(Map)
