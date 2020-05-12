@@ -136,7 +136,6 @@ function readAsciiHeaders(file) {
             }
         }
     }
-    let first = true
     const {
         typeIdentifier,
         endianness,

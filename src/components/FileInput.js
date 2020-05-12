@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { readBinaryData } from '../utils/read-binary-format/readBinaryData'
 import {
@@ -55,7 +55,7 @@ export const FileInput = ({
         } catch (e) {
             dispatchError(e.message)
         }
-    }, [])
+    }, [dispatchError, dispatchFilesLoaded, dispatchResolveError])
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
