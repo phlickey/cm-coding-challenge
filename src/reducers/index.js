@@ -1,6 +1,6 @@
-import { LOAD_FILES_TYPE } from "../actions/LoadFiles"
+import { LOAD_FILES_TYPE } from '../actions/LoadFiles'
 import { ERROR_TYPE, RESOLVE_ERROR_TYPE } from '../actions/Error'
-import {ViewModes, CHANGE_VIEW_MODE_TYPE } from '../actions/ChangeViewMode'
+import { ViewModes, CHANGE_VIEW_MODE_TYPE } from '../actions/ChangeViewMode'
 const initialState = {
     numberOfFiles: 0,
     inErrorState: false,
@@ -12,9 +12,9 @@ const initialState = {
     tripStartTime: null,
     tripEndTime: null,
     tripDurationInMinutes: null,
-    currentViewMode: ViewModes.MAP
+    currentViewMode: ViewModes.MAP,
 }
-export const reducer = (state=initialState, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_FILES_TYPE:
             return {
@@ -25,28 +25,27 @@ export const reducer = (state=initialState, action) => {
                 tripStartTime: action.payload.tripStartTime,
                 tripEndTime: action.payload.tripEndTime,
                 tripDurationInMinutes: action.payload.tripDurationInMinutes,
-                tripData:  action.payload.tripData,
-                tripDataHeaders: action.payload.fieldHeaders
+                tripData: action.payload.tripData,
+                tripDataHeaders: action.payload.fieldHeaders,
             }
         case ERROR_TYPE:
             return {
                 ...state,
                 inErrorState: true,
-                errorMessage: action.errorMessage
+                errorMessage: action.errorMessage,
             }
         case RESOLVE_ERROR_TYPE:
             return {
                 ...state,
                 inErrorState: false,
-                errorMessage: ''
+                errorMessage: '',
             }
         case CHANGE_VIEW_MODE_TYPE:
             return {
                 ...state,
-                currentViewMode: action.targetViewMode
+                currentViewMode: action.targetViewMode,
             }
         default:
-            return {...state}
+            return { ...state }
     }
 }
-
